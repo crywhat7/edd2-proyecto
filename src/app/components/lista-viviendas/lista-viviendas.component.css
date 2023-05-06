@@ -1,0 +1,27 @@
+/* Contenedor de todo */
+.lista {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 1rem;
+  max-height: 100vh;
+  overflow: auto;
+}
+
+/* Barra de busqueda */
+.lista .search-bar {
+  display: flex;
+  height: 3rem;
+  height: 15%;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+/* Cards de Vivienda */
+.cards-viviendas {
+  height: 85%;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+}

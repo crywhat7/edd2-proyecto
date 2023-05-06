@@ -1,0 +1,11 @@
+.container {
+  /* background-color: aqua; */
+  display: grid;
+  grid-template-columns: 4fr 8fr;
+}
+.lista-viviendas {
+  /* background-color: blueviolet; */
+}
+.informacion-vivienda {
+  background-color: brown;
+}

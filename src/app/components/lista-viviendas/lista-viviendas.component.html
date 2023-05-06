@@ -1,0 +1,10 @@
+<section class="lista">
+  <div class="search-bar">
+    <input type="text" placeholder="Buscar vivienda" [(ngModel)]="searchText" />
+  </div>
+  <div class="cards-viviendas">
+    <ng-container *ngFor="let vivienda of viviendas">
+      <app-card-vivienda [vivienda]="vivienda"></app-card-vivienda>
+    </ng-container>
+  </div>
+</section>

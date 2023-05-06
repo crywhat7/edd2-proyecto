@@ -1,0 +1,20 @@
+<span class="card-vivienda">
+  <span class="badge-estado estado-remodelacion"> DISPONIBLE </span>
+  <span class="imagen">
+    <img [src]="vivienda.imagen" alt="Imagen de la vivienda" />
+  </span>
+  <span class="informacion-vivienda">
+    <span class="campo-informacion">
+      {{ vivienda.nombre }}
+    </span>
+    <span class="campo-informacion">
+      {{ vivienda.ciudad }}
+    </span>
+    <span class="campo-informacion">
+      {{ vivienda.colonia }}
+    </span>
+    <span class="campo-informacion">
+      {{ vivienda.precio | currency : "L " }}
+    </span>
+  </span>
+</span>

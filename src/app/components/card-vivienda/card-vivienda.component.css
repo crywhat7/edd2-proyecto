@@ -1,0 +1,65 @@
+.card-vivienda {
+  display: grid;
+  grid-template-columns: 3fr 9fr;
+  width: 100%;
+  height: 100%;
+  height: 8rem;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+}
+.card-vivienda .imagen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.card-vivienda .imagen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-vivienda .informacion-vivienda {
+  padding-left: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.2rem;
+  user-select: none;
+}
+
+.card-vivienda:hover {
+  filter: brightness(0.9);
+  background-color: rgb(51, 50, 50);
+}
+.card-vivienda .badge-estado {
+  position: absolute;
+  right: 0;
+  margin-right: 0.5rem;
+  margin-top: 0.5rem;
+  font-size: 10px;
+  background-color: rgb(104, 104, 104);
+  width: 5rem;
+  text-align: center;
+  border-radius: 1rem;
+  padding: 0.15rem;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+.card-vivienda .estado-disponible {
+  background-color: rgb(57, 97, 56);
+}
+
+.card-vivienda .estado-vendido {
+  background-color: rgb(97, 56, 56);
+}
+
+.card-vivienda .estado-reservado {
+  background-color: rgb(80, 88, 30);
+}
+
+.card-vivienda .estado-remodelacion {
+  background-color: rgb(88, 61, 30);
+}
