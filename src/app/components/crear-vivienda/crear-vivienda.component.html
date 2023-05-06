@@ -1,0 +1,53 @@
+<section class="crear-vivienda">
+  <span class="titulo">
+    <h2>Crear vivienda</h2>
+  </span>
+  <span class="campo">
+    <label for="nombre">Nombre</label>
+    <input
+      type="text"
+      [(ngModel)]="nuevaVivienda.nombre"
+      placeholder="Ingrese el nombre de la vivienda"
+      maxlength="35"
+      required
+    />
+  </span>
+  <span class="campo">
+    <label for="ciudad">Ciudad</label>
+    <br />
+    <select id="ciudad" [(ngModel)]="nuevaVivienda.ciudad" required>
+      <option value="TEGUCIGALPA">TEGUCIGALPA</option>
+      <option value="SAN PEDRO SULA">SAN PEDRO SULA</option>
+      <option value="LA CEIBA">LA CEIBA</option>
+      <option value="COMAYAGUA">COMAYAGUA</option>
+      <option value="EL PROGRESO">EL PROGRESO</option>
+      <option value="DANLÍ">DANLÍ</option>
+    </select>
+  </span>
+  <span class="campo">
+    <label for="precio">Precio</label>
+    <input
+      type="number"
+      [(ngModel)]="nuevaVivienda.precio"
+      min="15000"
+      required
+    />
+  </span>
+  <span class="campo">
+    <label for="imagen">URL de la Imagen</label>
+    <input type="text" [(ngModel)]="nuevaVivienda.imagen" required />
+  </span>
+  <span class="btn-crear">
+    <button
+      [disabled]="
+        !nuevaVivienda.nombre ||
+        !nuevaVivienda.ciudad ||
+        !nuevaVivienda.precio ||
+        !nuevaVivienda.imagen
+      "
+      (click)="createVivienda()"
+    >
+      CREAR CASA
+    </button>
+  </span>
+</section>

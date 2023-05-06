@@ -23,7 +23,19 @@ export class ViviendasService {
     return this.txtToViviendasArray(viviendas);
   }
 
+  async getUltimoIdVivienda() {
+    const viviendas = await this.getViviendas();
+    const ultimoID = viviendas.reduce((acc, vivienda) => {
+      if (vivienda.id > acc) {
+        return vivienda.id;
+      }
+      return acc;
+    }, 0);
+    return ultimoID ?? 0;
+  }
+
   async createVivienda(vivienda: Vivienda) {
+    vivienda.id = (await this.getUltimoIdVivienda()) + 1;
     const viviendaTXT = this.viviendaToTXT(vivienda);
     const documentosRuta = await documentDir();
     const viviendas = await readTextFile(
@@ -45,13 +57,13 @@ export class ViviendasService {
   viviendaToTXT(vivienda: Vivienda) {
     return `${vivienda.id}${SEPARADOR}${vivienda.nombre}${SEPARADOR}${
       vivienda.imagen
-    }${SEPARADOR}${vivienda.colonia}${SEPARADOR}${vivienda.ciudad}${SEPARADOR}${
-      vivienda.precio
+    }${SEPARADOR}${vivienda?.colonia ?? ""}${SEPARADOR}${
+      vivienda.ciudad
+    }${SEPARADOR}${vivienda.precio}${SEPARADOR}${vivienda.estado}${SEPARADOR}${
+      vivienda?.fechaAgregado?.toISOString() ?? new Date().toISOString()
     }${SEPARADOR}${
-      vivienda.estado
-    }${SEPARADOR}${vivienda.fechaAgregado.toISOString()}${SEPARADOR}${vivienda.fechaVenta.toISOString()}${SEPARADOR}${
-      vivienda.duenio
-    }`;
+      vivienda?.fechaVenta?.toISOString() ?? new Date().toISOString()
+    }${SEPARADOR}${vivienda.duenio}`;
   }
   txtToViviendasArray(viviendasTXT: string) {
     const viviendasArray = viviendasTXT?.split("\n")?.filter((v) => v) ?? [];

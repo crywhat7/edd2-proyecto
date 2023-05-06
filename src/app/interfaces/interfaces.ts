@@ -5,10 +5,10 @@ export interface Vivienda {
   colonia: string;
   ciudad: string;
   precio: number;
-  estado: Estados;
-  fechaAgregado: Date;
-  fechaVenta: Date;
-  duenio: string;
+  estado?: Estados;
+  fechaAgregado?: Date;
+  fechaVenta?: Date;
+  duenio?: string;
 }
 
 export enum Estados {
