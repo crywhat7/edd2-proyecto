@@ -1,5 +1,9 @@
 <span class="card-vivienda">
-  <span class="badge-estado estado-remodelacion"> DISPONIBLE </span>
+  <span
+    class="badge-estado estado-{{ vivienda.estado?.toString()?.toLowerCase() }}"
+  >
+    {{ vivienda.estado }}
+  </span>
   <span class="imagen">
     <img [src]="vivienda.imagen" alt="Imagen de la vivienda" />
   </span>

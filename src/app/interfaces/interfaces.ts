@@ -1,4 +1,5 @@
 export interface Vivienda {
+  fueEliminado?: boolean;
   id: number;
   nombre: string;
   imagen: string;

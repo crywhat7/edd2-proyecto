@@ -4,7 +4,10 @@
   </div>
   <div class="cards-viviendas">
     <ng-container *ngFor="let vivienda of viviendas">
-      <app-card-vivienda [vivienda]="vivienda"></app-card-vivienda>
+      <app-card-vivienda
+        [vivienda]="vivienda"
+        (click)="seleccionarVivienda(vivienda)"
+      ></app-card-vivienda>
     </ng-container>
   </div>
 </section>

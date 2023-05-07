@@ -1,0 +1,86 @@
+<article class="vivienda-seleccionada">
+  <span class="campo">
+    <label for="">Nombre: </label>
+    <span class="campo-valor">{{ viviendaSeleccionada?.nombre }}</span>
+  </span>
+  <span class="campo">
+    <label for="">Ciudad: </label>
+    <span class="campo-valor">{{ viviendaSeleccionada?.ciudad }}</span>
+  </span>
+  <span class="campo">
+    <label for="">Precio: </label>
+    <span class="campo-valor">{{
+      viviendaSeleccionada?.precio | currency : "L "
+    }}</span>
+  </span>
+  <span class="campo">
+    <label for="">Disponibilidad: </label>
+    <span class="campo-valor">{{ viviendaSeleccionada?.estado }}</span>
+  </span>
+  <span class="campo">
+    <label for="">Fecha registrada: </label>
+    <span class="campo-valor">{{
+      viviendaSeleccionada?.fechaAgregado | date : "dd/MM/yyyy"
+    }}</span>
+  </span>
+  <span class="campo" *ngIf="viviendaSeleccionada?.estado === estados.VENDIDO">
+    <label for="">Fecha vendida: </label>
+    <span class="campo-valor">{{
+      viviendaSeleccionada?.fechaVenta | date : "dd/MM/yyyy"
+    }}</span>
+  </span>
+  <span class="selector">
+    <span class="selector__title">Cambiar Disponibilidad: </span>
+    <span class="selector__opciones">
+      <button
+        class="opciones__opcion op__disponible"
+        [disabled]="viviendaSeleccionada?.estado === estados.DISPONIBLE"
+        (click)="changeEstado(estados.DISPONIBLE)"
+      >
+        DISPONIBLE
+      </button>
+      <button
+        class="opciones__opcion op__vendida"
+        [disabled]="viviendaSeleccionada?.estado === estados.VENDIDO"
+        (click)="changeEstado(estados.VENDIDO)"
+      >
+        VENDIDA
+      </button>
+      <button
+        class="opciones__opcion op__remodelacion"
+        [disabled]="viviendaSeleccionada?.estado === estados.REMODELACION"
+        (click)="changeEstado(estados.REMODELACION)"
+      >
+        REMODELACION
+      </button>
+      <button
+        class="opciones__opcion op__reservado"
+        [disabled]="viviendaSeleccionada?.estado === estados.RESERVADO"
+        (click)="changeEstado(estados.RESERVADO)"
+      >
+        RESERVADO
+      </button>
+    </span>
+    <span class="selector">
+      <span class="selector__title">Cambiar Precio: </span>
+      <span class="selector__opciones">
+        <label for="">Precio: </label>
+        <input type="number" [(ngModel)]="nuevoPrecio" min="150000" />
+        <button class="btn-cambiar-precio" (click)="changePrecio()">
+          Cambiar
+        </button>
+      </span>
+    </span>
+    <span class="selector">
+      <span class="selector__title">Tomar acciones</span>
+      <span class="selector__opciones">
+        <button
+          class="opciones__opcion op__vendida"
+          (click)="eliminarVivienda()"
+        >
+          ELIMINAR VIVIENDA
+        </button>
+      </span>
+    </span>
+  </span>
+</article>

@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { Estados, Vivienda } from "src/app/interfaces/interfaces";
+import { ShareDataService } from "src/app/services/sharedata.service";
 import { ViviendasService } from "src/app/services/viviendas.service";
 
 @Component({
@@ -16,7 +17,10 @@ export class CrearViviendaComponent {
     ciudad: "",
     precio: 150000,
   };
-  constructor(private vService: ViviendasService) {}
+  constructor(
+    private vService: ViviendasService,
+    private sDService: ShareDataService
+  ) {}
   async createVivienda() {
     this.nuevaVivienda.fechaAgregado = new Date();
     this.nuevaVivienda.fechaVenta = new Date();
@@ -24,6 +28,16 @@ export class CrearViviendaComponent {
     console.log(this.nuevaVivienda);
 
     await this.vService.createVivienda(this.nuevaVivienda);
-    alert("Vivienda creada");
+    this.sDService.setComponentes({
+      listaViviendas: true,
+    });
+    this.nuevaVivienda = {
+      id: 0,
+      nombre: "",
+      imagen: "",
+      colonia: "",
+      ciudad: "",
+      precio: 150000,
+    };
   }
 }

@@ -3,6 +3,19 @@
     <app-lista-viviendas></app-lista-viviendas>
   </section>
   <section class="informacion-vivienda">
-    <app-crear-vivienda></app-crear-vivienda>
+    <article class="btn-crear">
+      <button class="btn-empaquetar" (click)="empaquetarArchivos()">
+        Empaquetar archivos
+      </button>
+      <button (click)="setVista('CREAR')">Agregar Vivienda</button>
+    </article>
+    <app-crear-vivienda
+      [style]="{ heigth: '85%' }"
+      *ngIf="vista === 'CREAR'"
+    ></app-crear-vivienda>
+    <app-info-vivienda
+      [style]="{ heigth: '85%' }"
+      *ngIf="vista === 'VER'"
+    ></app-info-vivienda>
   </section>
 </main>

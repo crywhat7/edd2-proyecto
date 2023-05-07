@@ -5,5 +5,44 @@
 }
 
 .informacion-vivienda {
-  background-color: brown;
+  /* background-color: brown; */
+  height: 100vh;
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.informacion-vivienda .btn-crear {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.informacion-vivienda .btn-crear button {
+  display: flex;
+  height: 3rem;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  padding: 0.5rem;
+  font-family: var(--fuente);
+  border: 0px solid;
+  border-radius: 1rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.informacion-vivienda .btn-crear button:hover {
+  background-color: rgb(22, 20, 20);
+}
+
+.informacion-vivienda .btn-crear .btn-empaquetar {
+  background-color: rgb(73, 2, 2);
+}
+
+.informacion-vivienda .btn-crear .btn-empaquetar:hover {
+  background-color: rgb(43, 0, 0);
 }
