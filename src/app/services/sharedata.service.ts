@@ -10,7 +10,7 @@ export class ShareDataService {
   private actualizarComponentes: BehaviorSubject<Componentes> =
     new BehaviorSubject<Componentes>({});
   private vistaActual: BehaviorSubject<vista> = new BehaviorSubject<vista>(
-    "VER"
+    "CREAR"
   );
   private viviendaSeleccionada: BehaviorSubject<Vivienda | null> =
     new BehaviorSubject<Vivienda | null>(null);

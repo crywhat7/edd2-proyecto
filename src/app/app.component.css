@@ -16,9 +16,19 @@
 .informacion-vivienda .btn-crear {
   display: flex;
   width: 100%;
+  height: 15%;
   justify-content: flex-end;
+  align-items: center;
   padding: 1rem;
   gap: 1rem;
+}
+
+.informacion-vivienda app-crear-vivienda {
+  height: 85% !important;
+}
+
+.informacion-vivienda app-info-vivienda {
+  height: 85% !important;
 }
 
 .informacion-vivienda .btn-crear button {

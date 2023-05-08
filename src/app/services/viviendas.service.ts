@@ -1,5 +1,10 @@
 import { Injectable } from "@angular/core";
-import { readTextFile, writeTextFile } from "@tauri-apps/api/fs";
+import {
+  readTextFile,
+  writeTextFile,
+  exists,
+  createDir,
+} from "@tauri-apps/api/fs";
 import { documentDir } from "@tauri-apps/api/path";
 import { Estados, Vivienda } from "../interfaces/interfaces";
 
@@ -15,7 +20,43 @@ const ELIMINADO = "***ELIMINADO***";
   providedIn: "root",
 })
 export class ViviendasService {
-  constructor() {}
+  constructor() {
+    this.prepararArchivos();
+  }
+
+  async prepararArchivos() {
+    const existe = await this.comprobarSiExisteCarpeta();
+    if (!existe) {
+      alert(
+        "No existe el directorio para guardar los archivos, se crearán en la carpeta Documentos"
+      );
+      await this.crearCarpeta();
+    }
+  }
+
+  async comprobarSiExisteCarpeta() {
+    const documentosRuta = await documentDir();
+    const existe = await exists(`${documentosRuta}${RUTA_CARPETA}`);
+    return existe;
+  }
+
+  async crearCarpeta() {
+    const documentosRuta = await documentDir();
+    await createDir(`${documentosRuta}${RUTA_CARPETA}`);
+    await this.crearArchivos();
+  }
+
+  async crearArchivos() {
+    const documentosRuta = await documentDir();
+    await writeTextFile(
+      `${documentosRuta}${RUTA_CARPETA}/${ARCHIVOS.VIVIENDAS}`,
+      ""
+    );
+    await writeTextFile(
+      `${documentosRuta}${RUTA_CARPETA}/${ARCHIVOS.ELIMINADOS}`,
+      ""
+    );
+  }
 
   async getViviendas() {
     const documentosRuta = await documentDir();
