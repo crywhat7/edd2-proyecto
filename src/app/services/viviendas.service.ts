@@ -10,6 +10,7 @@ const ARCHIVOS = {
 };
 const SEPARADOR = "#";
 const ELIMINADO = "***ELIMINADO***";
+const TAMANIO_MAXIMO = 300;
 
 @Injectable({
   providedIn: "root",
@@ -55,6 +56,7 @@ export class ViviendasService {
       `${documentosRuta}${RUTA_CARPETA}/${ARCHIVOS.VIVIENDAS}`,
       viviendasTXT
     );
+    this.establecerTamanioLinea();
     return {
       ok: true,
       mensaje: "Vivienda creada correctamente",
@@ -111,6 +113,7 @@ export class ViviendasService {
       `${documentosRuta}${RUTA_CARPETA}/${ARCHIVOS.VIVIENDAS}`,
       viviendasTXT
     );
+    this.establecerTamanioLinea();
 
     return {
       ok: true,
@@ -134,6 +137,7 @@ export class ViviendasService {
       `${documentosRuta}${RUTA_CARPETA}/${ARCHIVOS.VIVIENDAS}`,
       viviendasTXT
     );
+    this.establecerTamanioLinea();
 
     return {
       ok: true,
@@ -159,6 +163,7 @@ export class ViviendasService {
       `${documentosRuta}${RUTA_CARPETA}/${ARCHIVOS.ELIMINADOS}`,
       registrosEliminados.join("\n")
     );
+    this.establecerTamanioLinea();
   }
 
   async limpiarEliminados() {
@@ -178,6 +183,27 @@ export class ViviendasService {
     };
   }
 
+  async establecerTamanioLinea() {
+    // Queremos que cada linea tenga un maximo de 300 caracteres, así que se quiere que el archivo de viviendas agrege los caracteres necesarios o elimine los sobrantes
+    const viviendas = await this.getViviendas();
+    const viviendasTXT = viviendas.map((v) => this.viviendaToTXT(v));
+    const lineasCon300Caracteres = viviendasTXT.map((v) => {
+      if (v.length > TAMANIO_MAXIMO) {
+        return v.slice(0, TAMANIO_MAXIMO);
+      }
+      if (v.length < TAMANIO_MAXIMO) {
+        return v.padEnd(TAMANIO_MAXIMO, " ");
+      }
+      return v;
+    });
+    const documentosRuta = await documentDir();
+    const nuevasViviendasTXT = lineasCon300Caracteres.join("\n");
+    await writeTextFile(
+      `${documentosRuta}${RUTA_CARPETA}/${ARCHIVOS.VIVIENDAS}`,
+      nuevasViviendasTXT
+    );
+  }
+
   viviendaToTXT(vivienda: Vivienda) {
     if (vivienda.fueEliminado) return ELIMINADO;
     return `${vivienda.id}${SEPARADOR}${vivienda.nombre}${SEPARADOR}${
@@ -190,6 +216,7 @@ export class ViviendasService {
       vivienda?.fechaVenta?.toISOString() ?? new Date().toISOString()
     }${SEPARADOR}${vivienda.duenio}`;
   }
+
   txtToViviendasArray(viviendasTXT: string) {
     const viviendasArray = viviendasTXT?.split("\n")?.filter((v) => v) ?? [];
     const viviendas: Vivienda[] =
